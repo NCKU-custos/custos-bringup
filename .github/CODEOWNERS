@@ -1,0 +1,8 @@
+# custos-bringup owners
+# Bringup is the integration point. Core gates every change to ros2.repos
+# and the launch composition.
+*                            @custos/core
+ros2.repos                   @custos/core
+launch/                      @custos/core
+docs/adr/                    @custos/core
+.devcontainer/               @custos/core

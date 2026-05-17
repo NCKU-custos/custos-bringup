@@ -1,0 +1,47 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-tier1:
+    name: build (Ubuntu 26.04, Lyrical)
+    uses: NCKU-custos/custos-infra/.github/workflows/ros2-build.yml@main
+    with:
+      ros_distro: lyrical
+      ubuntu_version: "26.04"
+
+  lint:
+    uses: NCKU-custos/custos-infra/.github/workflows/lint.yml@main
+    with:
+      run_clang_format: false
+      run_ament_lint: false
+
+  validate-ros2-repos:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install vcstool
+        run: pip install vcstool
+      - name: Validate ros2.repos
+        run: |
+          vcs validate ros2.repos
+          # Pin discipline: every entry must have a `version:` set (tag or branch)
+          if grep -E '^\s*url:' ros2.repos | wc -l | xargs test 0 -ne; then
+            missing=$(python3 -c "
+          import yaml, sys
+          with open('ros2.repos') as f:
+              data = yaml.safe_load(f)
+          repos = data.get('repositories', {})
+          missing = [name for name, r in repos.items() if not r.get('version')]
+          if missing:
+              print('\n'.join(missing))
+              sys.exit(1)
+          ")
+            if [ -n "$missing" ]; then
+              echo "::error::ros2.repos entries missing pinned version: $missing"
+              exit 1
+            fi
+          fi

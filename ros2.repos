@@ -1,0 +1,56 @@
+# Custos drone stack — vcstool manifest.
+#
+# Usage:
+#   mkdir -p src
+#   vcs import src < ros2.repos
+#   colcon build
+#
+# Pinning policy:
+#   - Public repos pin to semver tags. Bump tags after release-please opens a
+#     "chore: release" PR in the source repo.
+#   - The private wrapper is included only when the user has org access.
+#   - Major-version bumps in custos-interfaces require coordinated updates
+#     across every consumer entry below before merging the bump here.
+
+repositories:
+  custos-infra:
+    type: git
+    url: https://github.com/NCKU-custos/custos-infra.git
+    version: v0.1.0
+
+  custos-interfaces:
+    type: git
+    url: https://github.com/NCKU-custos/custos-interfaces.git
+    version: v0.1.0
+
+  custos-perception:
+    type: git
+    url: https://github.com/NCKU-custos/custos-perception.git
+    version: v0.1.0
+
+  custos-control:
+    type: git
+    url: https://github.com/NCKU-custos/custos-control.git
+    version: v0.1.0
+
+  custos-navigation:
+    type: git
+    url: https://github.com/NCKU-custos/custos-navigation.git
+    version: v0.1.0
+
+  custos-simulation:
+    type: git
+    url: https://github.com/NCKU-custos/custos-simulation.git
+    version: v0.1.0
+
+  custos-hardware:
+    type: git
+    url: https://github.com/NCKU-custos/custos-hardware.git
+    version: v0.1.0
+
+  # Private — requires org access. Comment out for public-only builds; the
+  # mock node in custos-perception satisfies the same interfaces contract.
+  custos-novatek-sdk-wrapper:
+    type: git
+    url: https://github.com/NCKU-custos/custos-novatek-sdk-wrapper.git
+    version: v0.1.0
