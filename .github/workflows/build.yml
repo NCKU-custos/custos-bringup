@@ -6,12 +6,12 @@ on:
     branches: [main]
 
 jobs:
-  build-tier1:
-    name: build (Ubuntu 26.04, Lyrical)
-    uses: NCKU-custos/custos-infra/.github/workflows/ros2-build.yml@main
-    with:
-      ros_distro: lyrical
-      ubuntu_version: "26.04"
+  # NOTE: the full-stack `vcs import < ros2.repos && colcon build` is NOT a
+  # per-PR gate here. It needs org auth (the manifest includes the private
+  # wrapper) and the closed NOVATEK SDK, neither available to anonymous CI.
+  # That integration build lives in an authenticated release/dispatch workflow
+  # (the V2 manifest-reproducibility check), tracked separately. Per-PR CI on
+  # this meta-repo validates the manifest and lints.
 
   lint:
     uses: NCKU-custos/custos-infra/.github/workflows/lint.yml@main
