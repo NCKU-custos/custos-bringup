@@ -27,7 +27,7 @@ jobs:
         run: pip install vcstool
       - name: Validate ros2.repos
         run: |
-          vcs validate ros2.repos
+          vcs validate --input ros2.repos
           # Pin discipline: every entry must have a `version:` set (tag or branch)
           if grep -E '^\s*url:' ros2.repos | wc -l | xargs test 0 -ne; then
             missing=$(python3 -c "
