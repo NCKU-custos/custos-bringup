@@ -2,7 +2,7 @@
 
 Foundational decisions for the Custos drone stack. One markdown per decision, numbered sequentially. ADRs are append-only — to revise, write a new ADR that supersedes the old one and update the old one's Status to `Superseded by 00NN`.
 
-ADRs 0001–0013 capture the locked decisions made before commit 1. They are the answer to "why is the project set up this way?" when someone joins in 6 months.
+ADRs 0001–0013 capture the locked decisions made before commit 1. They are the answer to "why is the project set up this way?" when someone joins in 6 months. 0014 onward record decisions taken as the project evolves.
 
 ## Index
 
@@ -21,3 +21,4 @@ ADRs 0001–0013 capture the locked decisions made before commit 1. They are the
 | [0011](./0011-ros2-lyrical.md) | ROS2 Lyrical (LTS, 2026-05-22) on Ubuntu 26.04 | Accepted |
 | [0012](./0012-interfaces-multipackage.md) | Multi-package layout in `custos-interfaces` | Accepted |
 | [0013](./0013-public-from-day-one.md) | Public from day 1 (except NOVATEK wrapper) | Accepted |
+| [0014](./0014-triage-assistant-bot.md) | Brain-dump triage assistant bot | Accepted |
